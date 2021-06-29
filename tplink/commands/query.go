@@ -1,10 +1,11 @@
 package tpcmds
 
 import (
-	"fmt"
-	"../devices"
-	"../outputs"
 	"errors"
+	"fmt"
+
+	tpdevices "github.com/mikemrm/Go-TPLink-SmartPlug/tplink/devices"
+	tpoutput "github.com/mikemrm/Go-TPLink-SmartPlug/tplink/outputs"
 )
 
 func Query(output tpoutput.Output) error {

@@ -1,14 +1,15 @@
 package tpdevices
 
 import (
-	".."
-	"fmt"
 	"encoding/json"
+	"fmt"
+
+	"github.com/mikemrm/Go-TPLink-SmartPlug/tplink"
 )
 
 type TPDevices struct {
-	hosts	[]string
-	devices	[]TPDevice
+	hosts   []string
+	devices []TPDevice
 }
 
 func (ds *TPDevices) AddHost(host string) TPDevice {
@@ -39,14 +40,14 @@ func (ds *TPDevices) GetAllData() (error, []TPDevice) {
 			updates <- d.Addr
 		}(device)
 	}
-	Q:
+Q:
 	for {
 		select {
-			case <-updates:
-				completed++
-				if completed == len(ds.devices) {
-					break Q
-				}
+		case <-updates:
+			completed++
+			if completed == len(ds.devices) {
+				break Q
+			}
 		}
 	}
 	return nil, ds.devices

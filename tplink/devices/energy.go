@@ -1,14 +1,17 @@
 package tpdevices
 
-import ".."
-import "encoding/json"
+import (
+	"encoding/json"
+
+	"github.com/mikemrm/Go-TPLink-SmartPlug/tplink"
+)
 
 type RealTimeEnergy struct {
-	ErrorCode	uint8	`json:"err_code,omitempty"`
-	Power		float32	`json:"power,omitempty"`
-	Voltage		float32	`json:"voltage,omitempty"`
-	Current		float32	`json:"current,omitempty"`
-	TotalKwh	float32	`json:"total,omitempty"`
+	ErrorCode uint8   `json:"err_code,omitempty"`
+	Power     float32 `json:"power,omitempty"`
+	Voltage   float32 `json:"voltage,omitempty"`
+	Current   float32 `json:"current,omitempty"`
+	TotalKwh  float32 `json:"total,omitempty"`
 }
 
 type Energy struct {
@@ -16,7 +19,7 @@ type Energy struct {
 }
 
 type EnergyStructure struct {
-	Energy	Energy	`json:"emeter,omitempty"`
+	Energy Energy `json:"emeter,omitempty"`
 }
 
 func (d *TPDevice) GetRealTimeEnergy() (error, []string, RealTimeEnergy) {

@@ -1,8 +1,10 @@
 package tpoutput
+
 import (
 	"fmt"
 	"strings"
-	"../devices"
+
+	tpdevices "github.com/mikemrm/Go-TPLink-SmartPlug/tplink/devices"
 )
 
 type TableBrief struct {
@@ -43,14 +45,15 @@ func (t *TableBrief) Write(devices tpdevices.TPDevices) error {
 	AsciiTable(headers, rows)
 	return nil
 }
-type Table struct {}
+
+type Table struct{}
 
 func (t *Table) Write(devices tpdevices.TPDevices) error {
 	fmt.Println(devices)
 	return nil
 }
 
-func init(){
+func init() {
 	AddOutput("brief", func() (error, Output) {
 		return nil, &TableBrief{}
 	})
@@ -85,7 +88,7 @@ func AsciiTable(header []string, rows [][]string) {
 	for i, col := range header {
 		diff := col_widths[i] - len(col)
 		if diff > 0 {
-			padded_header = append(padded_header, col + strings.Repeat(" ", diff))
+			padded_header = append(padded_header, col+strings.Repeat(" ", diff))
 		} else {
 			padded_header = append(padded_header, col)
 		}
@@ -99,7 +102,7 @@ func AsciiTable(header []string, rows [][]string) {
 		for i, col := range row {
 			diff := col_widths[i] - len(col)
 			if diff > 0 {
-				padded = append(padded, col + strings.Repeat(" ", diff))
+				padded = append(padded, col+strings.Repeat(" ", diff))
 			} else {
 				padded = append(padded, col)
 			}

@@ -1,14 +1,17 @@
 package tpoutput
 
-import "../devices"
-import "errors"
+import (
+	"errors"
 
+	tpdevices "github.com/mikemrm/Go-TPLink-SmartPlug/tplink/devices"
+)
 
 type Output interface {
 	Write(tpdevices.TPDevices) error
 }
 
-type bad struct {}
+type bad struct{}
+
 func (b *bad) Write(devices tpdevices.TPDevices) error {
 	return nil
 }
